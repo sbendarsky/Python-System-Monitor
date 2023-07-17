@@ -38,7 +38,7 @@ To get started with the system monitoring, follow the steps below:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/sbendarsky/System-Monitor_Python.git
+   git clone https://github.com/sbendarsky/Python-System-Monitor.git
    cd System-Monitor_Python
 
 2. Install the required dependencies:
