@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>System Monitoring Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .data {
+            padding: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>System Monitoring Dashboard</h1>
+        <div class="data">
+            <h2>CPU Usage</h2>
+            <p>{{ cpu_usage }}%</p>
+        </div>
+        <div class="data">
+            <h2>Memory Usage</h2>
+            <p>{{ mem_usage }}%</p>
+        </div>
+    </div>
+</body>
+</html>

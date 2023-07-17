@@ -1,5 +1,5 @@
 import psutil
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def index():
     if cpu_usage > 80 or mem_usage > 80:
         return "Warning, High CPU or Memory utilization detected! CPU usage is {}. Memory usage is {}".format(cpu_usage,
                                                                                                               mem_usage)
-    return "CPU usage is {}. Memory usage is {}".format(cpu_usage, mem_usage)
+    return render_template("index.html", cpu_usage=cpu_usage, mem_usage=mem_usage)
 
 
 if __name__ == "__main__":
