@@ -13,26 +13,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 12px;
 }
 
 .container {
     width: 90%;
-    max-width: 500px;
+    max-width: 300px;
     background-color: rgba(255, 255, 255, 0.95);
     padding: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     text-align: center;
+
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 20px;
     margin-bottom: 30px;
     color: #333;
 }
 
 .data {
-    padding: 20px;
+    padding: 5px;
     background-color: #f2f2f2;
     border: 2px solid #ccc;
     margin-top: 30px;
@@ -47,6 +49,7 @@ h1 {
     border-radius: 5px;
     margin-bottom: 10px;
     text-transform: uppercase;
+    font-size: 10px;
 }
 
 .alert-ok {
@@ -60,16 +63,15 @@ h1 {
 }
 
 p {
-    font-size: 18px;
+    font-size: 12px;
     color: #333;
     margin-top: 15px;
 }
 
 /* Styles for chart containers */
 .data canvas {
-    margin-top: 10px;
     width: 100%;
-    max-width: 180px;
+    max-width: 120px;
     height: auto;
     display: block;
     margin: 0 auto;
