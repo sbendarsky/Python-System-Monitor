@@ -2,37 +2,98 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            function updateData() {
-                $.ajax({
-                    url: "/data",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        $("#cpu-usage").text(data.cpu_usage + "%");
-                        $("#mem-usage").text(data.mem_usage + "%");
-                        $("#msg").text(data.msg);
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    $(document).ready(function() {
+        var cpuChart, memChart; // Variables to store the chart instances
 
-                        // Check if status is "Warning" and display the warning alert
-                        if (data.msg === "Warning") {
-                            $("#msg").removeClass("alert-ok").addClass("alert-warning");
-                            $("#msg").text("System Status: Warning - CPU or Memory usage is above 80%");
-                        } else {
-                            // If status is not "Warning," set it back to "OK" and show the success alert
-                            $("#msg").removeClass("alert-warning").addClass("alert-ok");
-                            $("#msg").text("System Status: Everything is running smoothly.");
-                        }
-                    },
-                    error: function() {
-                        console.log("Error fetching data.");
-                    }
-                });
+        function createChart(chartElement, data) {
+            var backgroundColor;
+            if (data > 80) {
+                backgroundColor = '#f04e4e'; // Red color for values above 80
+            } else if (data > 40) {
+                backgroundColor = '#f0ad4e'; // Orange color for values above 40
+            } else {
+                backgroundColor = '#5cb85c'; // Light green color for values below 40
             }
-            updateData();
-            setInterval(updateData, 5000); // Update every 5 seconds (adjust as needed)
-        });
-    </script>
+
+            var ctx = chartElement.getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [data, 100 - data],
+                        backgroundColor: [backgroundColor, '#eaeaea'],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    cutoutPercentage: 80,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        enabled: false
+                    }
+                }
+            });
+            return chart;
+        }
+
+        function updateCharts() {
+            if (data) {
+                // Destroy previous chart instances if they exist
+                if (cpuChart) {
+                    cpuChart.destroy();
+                }
+                if (memChart) {
+                    memChart.destroy();
+                }
+
+                // Update CPU chart
+                cpuChart = createChart(document.getElementById('cpu-chart'), data.cpu_usage, 'CPU', '#5cb85c');
+
+                // Update Memory chart
+                memChart = createChart(document.getElementById('mem-chart'), data.mem_usage, 'Memory', '#f0ad4e');
+            }
+        }
+
+        function updateData() {
+            $.ajax({
+                url: "/data",
+                type: "GET",
+                dataType: "json",
+                success: function(responseData) {
+                    data = responseData;
+                    $("#cpu-usage").text(data.cpu_usage + "%");
+                    $("#mem-usage").text(data.mem_usage + "%");
+                    $("#msg").text(data.msg);
+
+                    // Check if status is "Warning" and display the warning alert
+                    if (data.msg === "Warning") {
+                        $("#msg").removeClass("alert-ok").addClass("alert-warning");
+                        $("#msg").text("System Status: Warning - CPU or Memory usage is above 80%");
+                    } else {
+                        // If status is not "Warning," set it back to "OK" and show the success alert
+                        $("#msg").removeClass("alert-warning").addClass("alert-ok");
+                        $("#msg").text("System Status: Everything is running smoothly.");
+                    }
+
+                    // Call updateCharts() after data is fetched to update the charts
+                    updateCharts();
+                },
+                error: function() {
+                    console.log("Error fetching data.");
+                }
+            });
+        }
+
+        // Call updateData() initially and every 5 seconds
+        updateData();
+        setInterval(updateData, 5000);
+    });
+</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>System Monitoring Dashboard</title>
@@ -43,12 +104,14 @@
     <div class="container">
         <h1>System Monitoring Dashboard</h1>
         <div class="data">
-            <h2>CPU Usage</h2>
-            <p><span id="cpu-usage">{{ cpu_usage }}%</span></p>
+        <h2>CPU Usage</h2>
+        <p><span id="cpu-usage">{{ cpu_usage }}%</span></p>
+        <canvas id="cpu-chart"></canvas>
         </div>
         <div class="data">
-            <h2>Memory Usage</h2>
-            <p><span id="mem-usage">{{ mem_usage }}%</span></p>
+        <h2>Memory Usage</h2>
+        <p><span id="mem-usage">{{ mem_usage }}%</span></p>
+        <canvas id="mem-chart"></canvas>
         </div>
         <div class="data">
             <h2>Alerts</h2>
