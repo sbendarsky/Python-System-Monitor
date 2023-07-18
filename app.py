@@ -6,8 +6,7 @@ app = Flask(__name__, static_folder='static')
 
 @app.route('/images/background.jpeg')
 def serve_static():
-    filename = 'background.jpeg'
-    return send_from_directory('static/images', filename)
+    return send_from_directory('static/images', 'background.jpeg')
 
 
 @app.route("/data")

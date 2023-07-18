@@ -3,12 +3,37 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    $(document).ready(function() {
-        var cpuChart, memChart; // Variables to store the chart instances
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Monitoring Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>System Monitoring Dashboard</h1>
+        <div class="data">
+            <h2>CPU Usage</h2>
+            <p><span id="cpu-usage">{{ cpu_usage }}%</span></p>
+            <canvas id="cpu-chart"></canvas>
+        </div>
+        <div class="data">
+            <h2>Memory Usage</h2>
+            <p><span id="mem-usage">{{ mem_usage }}%</span></p>
+            <canvas id="mem-chart"></canvas>
+        </div>
+        <div class="data">
+            <h2>Alerts</h2>
+            <div id="msg" class="alert alert-ok"></div>
+        </div>
+        <div class="update-time">Next Update: <span id="next-update-time"></span></div>
+    </div>
+
+    <script>
+        let cpuChart, memChart; // Variables to store the chart instances
+        let countdownInterval; // Variable to store the countdown interval
 
         function createChart(chartElement, data) {
-            var backgroundColor;
+            let backgroundColor;
             if (data > 80) {
                 backgroundColor = '#f04e4e'; // Red color for values above 80
             } else if (data > 40) {
@@ -17,8 +42,8 @@
                 backgroundColor = '#5cb85c'; // Light green color for values below 40
             }
 
-            var ctx = chartElement.getContext('2d');
-            var chart = new Chart(ctx, {
+            const ctx = chartElement.getContext('2d');
+            const chart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     datasets: [{
@@ -59,6 +84,22 @@
             }
         }
 
+        function updateNextUpdateTime(nextUpdate) {
+            clearInterval(countdownInterval);
+
+            countdownInterval = setInterval(function() {
+                const now = new Date();
+                const remainingTime = Math.max(Math.floor((nextUpdate - now) / 1000), 0);
+
+                // Display the countdown on the dashboard
+                $("#next-update-time").text(remainingTime > 0 ? "" + remainingTime + "s" : " 0s");
+
+                if (remainingTime <= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000); // Update every 1 second (1000 milliseconds)
+        }
+
         function updateData() {
             $.ajax({
                 url: "/data",
@@ -80,6 +121,9 @@
                         $("#msg").text("System Status: Everything is running smoothly.");
                     }
 
+                    var now = new Date();
+                    var nextUpdate = new Date(now.getTime() + 5000);
+                    updateNextUpdateTime(nextUpdate);
                     // Call updateCharts() after data is fetched to update the charts
                     updateCharts();
                 },
@@ -89,34 +133,8 @@
             });
         }
 
-        // Call updateData() initially and every 5 seconds
         updateData();
         setInterval(updateData, 5000);
-    });
-</script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>System Monitoring Dashboard</title>
-    <!-- Link the styles.css file -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>System Monitoring Dashboard</h1>
-        <div class="data">
-        <h2>CPU Usage</h2>
-        <p><span id="cpu-usage">{{ cpu_usage }}%</span></p>
-        <canvas id="cpu-chart"></canvas>
-        </div>
-        <div class="data">
-        <h2>Memory Usage</h2>
-        <p><span id="mem-usage">{{ mem_usage }}%</span></p>
-        <canvas id="mem-chart"></canvas>
-        </div>
-        <div class="data">
-            <h2>Alerts</h2>
-            <div id="msg" class="alert alert-ok"></div>
-        </div>
-    </div>
+    </script>
 </body>
 </html>

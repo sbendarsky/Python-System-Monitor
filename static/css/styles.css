@@ -23,6 +23,7 @@ body {
     padding: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
+    position: relative;
     text-align: center;
 
 }
@@ -75,6 +76,20 @@ p {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+/* Styles for the next update time */
+.update-time {
+    position: absolute;
+    bottom: 10px; /* Adjust the bottom spacing */
+    right: 10px; /* Adjust the right spacing */
+    font-size: 10px; /* Increase the font size for better visibility */
+    color: #777;
+    font-weight: bold;
+}
+
+.data:nth-child(3) {
+    margin-bottom: 40px; /* Adjust the spacing as needed */
 }
 
 /* Adjust styles for mobile devices */
