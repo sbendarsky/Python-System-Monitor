@@ -25,7 +25,6 @@ body {
     border-radius: 15px;
     position: relative;
     text-align: center;
-
 }
 
 h1 {
@@ -105,4 +104,38 @@ p {
     p {
         font-size: 16px;
     }
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #000000;
+}
+
+.dark-mode-toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #f5deb3;
+    cursor: pointer;
+}
+
+/* Styles for Dark Mode icons */
+.dark-mode .fa-sun {
+    color: #ffd700; /* Custom color for sun icon in Dark Mode (yellow) */
+}
+
+.dark-mode .fa-moon {
+    color: #f0e68c; /* Custom color for moon icon in Dark Mode (light yellow) */
+}
+
+/* Show sun icon in Light Mode */
+.light-mode .fa-sun {
+    color: #d99519; /* Custom color for sun icon in Light Mode (beige) */
+}
+
+.light-mode .fa-moon {
+    color: #000000; /* Custom color for moon icon in Light Mode (white) */
 }

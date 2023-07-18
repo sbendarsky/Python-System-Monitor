@@ -3,6 +3,7 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>System Monitoring Dashboard</title>
@@ -25,13 +26,43 @@
             <h2>Alerts</h2>
             <div id="msg" class="alert alert-ok"></div>
         </div>
+        <button class="dark-mode-toggle">
+            <i class="fas fa-sun sun-icon"></i>
+            <i class="fas fa-moon moon-icon"></i>
+        </button>
         <div class="update-time">Next Update: <span id="next-update-time"></span></div>
     </div>
 
     <script>
-        let cpuChart, memChart; // Variables to store the chart instances
-        let countdownInterval; // Variable to store the countdown interval
+    let cpuChart, memChart; // Variables to store the chart instances
+    let countdownInterval; // Variable to store the countdown interval
 
+    $(document).ready(function() {
+        // Function to toggle Dark Mode
+        function toggleDarkMode() {
+            $("body").toggleClass("dark-mode");
+            // Save the user's Dark Mode preference in local storage
+            const isDarkMode = $("body").hasClass("dark-mode");
+            localStorage.setItem("darkMode", isDarkMode);
+            // Toggle the visibility of sun and moon icons
+            $(".fa-sun").toggle(!isDarkMode);
+            $(".fa-moon").toggle(isDarkMode);
+        }
+
+        // Add event listener to the button for toggling Dark Mode
+        $(".dark-mode-toggle").on("click", function() {
+            toggleDarkMode();
+        });
+
+        // Check for the user's Dark Mode preference in local storage
+        const isDarkMode = localStorage.getItem("darkMode") === "true";
+        if (isDarkMode) {
+            $("body").addClass("dark-mode");
+            $(".fa-sun").hide();
+        } else {
+            $(".fa-moon").hide();
+        }
+    });
         function createChart(chartElement, data) {
             let backgroundColor;
             if (data > 80) {
@@ -131,6 +162,9 @@
                     console.log("Error fetching data.");
                 }
             });
+        }
+        function toggleDarkMode() {
+          $("body").toggleClass("dark-mode");
         }
 
         updateData();
