@@ -1,13 +1,13 @@
 import psutil
 from flask import Flask, render_template, send_from_directory, jsonify
 
-app = Flask(__name__, static_folder='images')
+app = Flask(__name__, static_folder='static')
 
 
 @app.route('/images/background.jpeg')
 def serve_static():
     filename = 'background.jpeg'
-    return send_from_directory('images', filename)
+    return send_from_directory('static/images', filename)
 
 
 @app.route("/data")
@@ -15,7 +15,7 @@ def data():
     cpu_usage = psutil.cpu_percent()
     mem_usage = psutil.virtual_memory().percent
     msg = "OK"
-    if cpu_usage > 20 or mem_usage > 80:
+    if cpu_usage > 80 or mem_usage > 80:
         msg = "Warning"
     return jsonify(cpu_usage=cpu_usage, mem_usage=mem_usage, msg=msg)
 
@@ -28,4 +28,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

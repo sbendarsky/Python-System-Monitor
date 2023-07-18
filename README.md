@@ -59,7 +59,7 @@ To get started with the system monitoring, follow the steps below:
 3. Monitor your system's CPU and memory usage in real-time and view historical data for analysis.
 
 ### Output
-![Screenshot](images/system-monitor.png)
+![Screenshot](static/images/system-monitor.png)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Python]: https://img.shields.io/badge/Python-3C873A?style=for-the-badge&labelColor=black&logo=python&logoColor=3C873A
