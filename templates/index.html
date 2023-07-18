@@ -6,41 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-image: url("https://cdn.wallpapersafari.com/72/38/8qPHdj.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-blend-mode: multiply;
+            backdrop-filter: blur(8px);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
+            width: 90%;
             max-width: 500px;
-            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 30px;
+            color: #333;
         }
 
         .data {
-            padding: 10px;
+            padding: 20px;
             background-color: #f2f2f2;
-            border: 1px solid #ccc;
-            margin-top: 10px;
+            border: 2px solid #ccc;
+            margin-top: 30px;
             text-align: center;
+            border-radius: 10px;
         }
 
         /* Custom styles for alerts */
         .alert {
-            color: white;
             font-weight: bold;
-            padding: 5px;
+            padding: 8px 15px;
             border-radius: 5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .alert-ok {
-            background-color: lightgreen;
+            background-color: #5cb85c;
+            color: #fff;
         }
 
         .alert-warning {
-            background-color: lightcoral;
+            background-color: #f0ad4e;
+            color: #fff;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        /* Adjust styles for mobile devices */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .data {
+                padding: 15px;
+            }
+
+            p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -62,7 +104,7 @@
                 <p>Everything is running smoothly.</p>
             {% elif msg == "Warning" %}
                 <div class="alert alert-warning">System Status: Warning</div>
-                <p>There are some issues that need attention.</p>
+                <p>CPU or Memory usage is over 80%</p>
             {% endif %}
         </div>
     </div>
