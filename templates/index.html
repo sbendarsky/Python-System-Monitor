@@ -1,9 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>System Monitoring Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateData() {
+                $.ajax({
+                    url: "/data",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        $("#cpu-usage").text(data.cpu_usage + "%");
+                        $("#mem-usage").text(data.mem_usage + "%");
+                        $("#msg").text(data.msg);
+
+                        // Check if status is "Warning" and display the warning alert
+                        if (data.msg === "Warning") {
+                            $("#msg").removeClass("alert-ok").addClass("alert-warning");
+                            $("#msg").text("System Status: Warning - CPU or Memory usage is above 80%");
+                        } else {
+                            // If status is not "Warning," set it back to "OK" and show the success alert
+                            $("#msg").removeClass("alert-warning").addClass("alert-ok");
+                            $("#msg").text("System Status: Everything is running smoothly.");
+                        }
+                    },
+                    error: function() {
+                        console.log("Error fetching data.");
+                    }
+                });
+            }
+            updateData();
+            setInterval(updateData, 5000); // Update every 5 seconds (adjust as needed)
+        });
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Monitoring Dashboard</title>
     <style>
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -60,7 +92,7 @@
         }
 
         .alert-warning {
-            background-color: #f0ad4e;
+            background-color: #f04e4e;
             color: #fff;
         }
 
@@ -84,29 +116,23 @@
                 font-size: 16px;
             }
         }
-        <img src="background.jpeg" height="2160" width="3840"/><img src="/images/background.jpeg" height="2160" width="3840"/></style>
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>System Monitoring Dashboard</h1>
         <div class="data">
             <h2>CPU Usage</h2>
-            <p>{{ cpu_usage }}%</p>
+            <p><span id="cpu-usage">{{ cpu_usage }}%</span></p>
         </div>
         <div class="data">
             <h2>Memory Usage</h2>
-            <p>{{ mem_usage }}%</p>
+            <p><span id="mem-usage">{{ mem_usage }}%</span></p>
         </div>
         <div class="data">
             <h2>Alerts</h2>
-            {% if msg == "OK" %}
-                <div class="alert alert-ok">System Status: OK</div>
-                <p>Everything is running smoothly.</p>
-            {% elif msg == "Warning" %}
-                <div class="alert alert-warning">System Status: Warning</div>
-                <p>CPU or Memory usage is over 80%</p>
-            {% endif %}
+            <div id="msg" class="alert alert-ok"></div>
         </div>
-    </div>
+        </div>
 </body>
 </html>
