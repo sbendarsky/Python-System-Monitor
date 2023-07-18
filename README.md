@@ -40,24 +40,26 @@ To get started with the system monitoring, follow the steps below:
    ```bash
    git clone https://github.com/sbendarsky/Python-System-Monitor.git
    cd Python-System-Monitor
-
+    ```
 
 2. Install the required dependencies:
 
    ```bash
    pip install -r requirements.txt
+    ```
 
 ### Usage
 
 1. Run the application:
    ```bash
    python3 app.py
+    ```
 
 2. Open your web browser and navigate to http://localhost:5000/ to access the monitoring dashboard.
 3. Monitor your system's CPU and memory usage in real-time and view historical data for analysis.
 
 ### Output
-![Screenshot](https://raw.github.com/sbendarsky/System-Monitor_Python/dev/system-monitor.png)
+![Screenshot](images/system-monitor.png)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [Python]: https://img.shields.io/badge/Python-3C873A?style=for-the-badge&labelColor=black&logo=python&logoColor=3C873A
