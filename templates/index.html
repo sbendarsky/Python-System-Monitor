@@ -26,6 +26,22 @@
             margin-top: 10px;
             text-align: center;
         }
+
+        /* Custom styles for alerts */
+        .alert {
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .alert-ok {
+            background-color: lightgreen;
+        }
+
+        .alert-warning {
+            background-color: lightcoral;
+        }
     </style>
 </head>
 <body>
@@ -38,6 +54,16 @@
         <div class="data">
             <h2>Memory Usage</h2>
             <p>{{ mem_usage }}%</p>
+        </div>
+        <div class="data">
+            <h2>Alerts</h2>
+            {% if msg == "OK" %}
+                <div class="alert alert-ok">System Status: OK</div>
+                <p>Everything is running smoothly.</p>
+            {% elif msg == "Warning" %}
+                <div class="alert alert-warning">System Status: Warning</div>
+                <p>There are some issues that need attention.</p>
+            {% endif %}
         </div>
     </div>
 </body>

@@ -8,10 +8,10 @@ app = Flask(__name__)
 def index():
     cpu_usage = psutil.cpu_percent()
     mem_usage = psutil.virtual_memory().percent
+    msg = "OK"
     if cpu_usage > 80 or mem_usage > 80:
-        return "Warning, High CPU or Memory utilization detected! CPU usage is {}. Memory usage is {}".format(cpu_usage,
-                                                                                                              mem_usage)
-    return render_template("index.html", cpu_usage=cpu_usage, mem_usage=mem_usage)
+        msg = "Warning"
+    return render_template("index.html", cpu_usage=cpu_usage, mem_usage=mem_usage, msg=msg)
 
 
 if __name__ == "__main__":
