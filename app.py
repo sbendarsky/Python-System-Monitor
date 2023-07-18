@@ -17,7 +17,7 @@ def index():
     msg = "OK"
     if cpu_usage > 80 or mem_usage > 80:
         msg = "Warning"
-    return render_template("index.html", cpu_usage=cpu_usage, mem_usage=mem_usage, msg=msg, background=send_from_directory('images', 'background.jpeg'))
+    return render_template("index.html", cpu_usage=cpu_usage, mem_usage=mem_usage, msg=msg)
 
 
 if __name__ == "__main__":
