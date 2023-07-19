@@ -117,3 +117,9 @@ body {
 .login-form .action button:nth-child(2):hover {
   background: #3c4d6d;
 }
+.error-message {
+    color: #f04e4e; /* Light red for error messages */
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
