@@ -1,11 +1,10 @@
+import os
 import psutil
 from flask import Flask, render_template, send_from_directory, jsonify, request, redirect, session
 from flask_session.__init__ import Session
-import os
 
-key = os.urandom(8)
 app = Flask(__name__, static_folder='static')
-app.secret_key = key
+app.secret_key = os.urandom(8)
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -13,7 +12,7 @@ Session(app)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        data = request.get_json()  # Get JSON data from the request
+        data = request.get_json()
         username = data.get("username")
         password = data.get("password")
         if username == "admin" and password == "admin":
@@ -22,14 +21,9 @@ def login():
         else:
             return jsonify(message="Invalid username or password"), 401
 
-    # If the user is already logged in, redirect them to the dashboard
     if session.get("logged_in"):
         return redirect("/")
-
-    # Render the login page
     return render_template("login.html")
-
-
 
 
 @app.route('/images/background.jpeg')
@@ -63,4 +57,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
