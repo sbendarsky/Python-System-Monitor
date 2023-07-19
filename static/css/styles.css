@@ -146,7 +146,7 @@ p {
 }
 
 .logout-button {
-    background-color: #777474;
+    background-color: #f04e4e;
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
@@ -176,7 +176,7 @@ p {
 
 
 .logout-button:hover {
-    background-color: #343434; /* Light red on hover */
+    background-color: #d9534f; /* Light red on hover */
 }
 .error-message {
     color: #f04e4e; /* Light red for error messages */

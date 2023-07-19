@@ -1,33 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'>
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/log.css') }}">
+  <title>Login - System Monitoring Dashboard</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/log.css') }}">
 </head>
 <body>
-  <div class="login-form">
-    <form id="login-form" method="POST" action="/login">
-        <h1>Login - System Monitoring Dashboard</h1>
-      <div class="content">
-        <div class="input-field">
-          <label for="username"></label>
-          <input type="text" id="username" name="username" placeholder="Username" autocomplete="nope" required>
-        </div>
-        <div class="input-field">
-          <label for="password"></label>
-          <input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password" required>
-        </div>
-        <p class="error-message" id="error-message" style="display: none;">Invalid username or password. Please try again.</p>
-        <a href="#" class="link">Forgot Your Password?</a>
+<!-- partial:index.partial.html -->
+<div class="login-form">
+  <form id="login-form" method="POST" action="/login">
+    <h1>Login</h1>
+    <div class="content">
+      <div class="input-field">
+          <label for="username"></label><input type="text" id="username" name="username" placeholder="Username" autocomplete="nope" required>
       </div>
-      <div class="action">
-        <button type="submit" id="login-button">Sign In</button>
+      <div class="input-field">
+          <label for="password"></label><input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password" required>
       </div>
-    </form>
-  </div>
-  <script src="{{ url_for('static', filename='js/log-script.js') }}"></script>
+      <a href="#" class="link">Forgot Your Password?</a>
+    </div>
+    <div class="action">
+	  <button type="submit" id="login-button">Sign In</button>
+    </div>
+  </form>
+</div>
+<!-- partial -->
+    <script src="{{ url_for('static', filename='js/log-script.js') }}"></script>
 </body>
 </html>
