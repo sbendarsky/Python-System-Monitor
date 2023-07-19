@@ -13,15 +13,14 @@ Session(app)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
+        data = request.get_json()  # Get JSON data from the request
+        username = data.get("username")
+        password = data.get("password")
         if username == "admin" and password == "admin":
             session["logged_in"] = True
-            return redirect("/")
+            return jsonify(message="Login success"), 200
         else:
-            # Provide an error message for incorrect login credentials
-            error_msg = "Invalid username or password. Please try again."
-            return render_template("login.html", error_msg=error_msg)
+            return jsonify(message="Invalid username or password"), 401
 
     # If the user is already logged in, redirect them to the dashboard
     if session.get("logged_in"):
@@ -29,6 +28,8 @@ def login():
 
     # Render the login page
     return render_template("login.html")
+
+
 
 
 @app.route('/images/background.jpeg')
