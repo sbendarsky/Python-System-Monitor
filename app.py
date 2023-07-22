@@ -19,15 +19,12 @@ def login():
             session["logged_in"] = True
             return redirect("/")
         else:
-            # Provide an error message for incorrect login credentials
             error_msg = "Invalid username or password. Please try again."
             return render_template("login.html", error_msg=error_msg)
 
-    # If the user is already logged in, redirect them to the dashboard
     if session.get("logged_in"):
         return redirect("/")
 
-    # Render the login page
     return render_template("login.html")
 
 
@@ -62,4 +59,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')

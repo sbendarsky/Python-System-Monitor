@@ -43,7 +43,6 @@ h1 {
     font-family: 'Rubik', sans-serif;
 }
 
-/* Custom styles for alerts */
 .alert {
     font-weight: bold;
     padding: 8px 15px;
@@ -79,18 +78,17 @@ p {
     margin: 0 auto;
 }
 
-/* Styles for the next update time */
+
 .update-time {
     position: absolute;
-    bottom: 10px; /* Adjust the bottom spacing */
-    right: 10px; /* Adjust the right spacing */
-    font-size: 10px; /* Increase the font size for better visibility */
+    bottom: 10px; 
+    right: 10px; 
+    font-size: 10px; 
     color: #777;
     font-weight: bold;
 }
 
 
-/* Adjust styles for mobile devices */
 @media (max-width: 480px) {
     h1 {
         font-size: 28px;
@@ -121,22 +119,20 @@ p {
     cursor: pointer;
 }
 
-/* Styles for Dark Mode icons */
 .dark-mode .fa-sun {
-    color: #ffd700; /* Custom color for sun icon in Dark Mode (yellow) */
+    color: #ffd700; 
 }
 
 .dark-mode .fa-moon {
-    color: #f0e68c; /* Custom color for moon icon in Dark Mode (light yellow) */
+    color: #f0e68c; 
 }
 
-/* Show sun icon in Light Mode */
 .light-mode .fa-sun {
-    color: #d99519; /* Custom color for sun icon in Light Mode (beige) */
+    color: #d99519; 
 }
 
 .light-mode .fa-moon {
-    color: #000000; /* Custom color for moon icon in Light Mode (white) */
+    color: #000000; 
 }
 .logout-button-container {
     display: flex;
@@ -176,10 +172,10 @@ p {
 
 
 .logout-button:hover {
-    background-color: #d9534f; /* Light red on hover */
-}
+    background-color: #d9534f; 
 .error-message {
-    color: #f04e4e; /* Light red for error messages */
+    color: #f04e4e; 
     font-size: 12px;
     margin-top: 5px;
+}
 }

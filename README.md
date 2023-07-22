@@ -21,13 +21,13 @@ The project is built with Python, HTML, JavaScript, and CSS. The following libra
 
 <!-- TO-DO Section -->
 ### To Do:
-* Add historical CPU and memory usage data over different time periods.
-* Improve the HTML/CSS of the monitoring dashboard for a more user-friendly and visually appealing interface.
-* Set up Docker for the application to enable easy deployment and management.
-* add a login page to the application to allow multiple users to access the monitoring dashboard. 
+* Add historical CPU and memory usage data over different time periods.✕
+* Improve the HTML/CSS of the monitoring dashboard for a more user-friendly and visually appealing interface. ✓
+* Set up Docker for the application to enable easy deployment and management. ✓
+* add a login page to the application to allow multiple users to access the monitoring dashboard. ✓
 * Add a dark mode option to the monitoring dashboard. ✓
-* Add a feature to allow users to download the historical data as a CSV file. 
-* Add database functionality to the application to store historical data.
+* Add a feature to allow users to download the historical data as a CSV file. ✕
+* Add database functionality to the application to store historical data.✕
 
 
 <!-- Getting Started Section -->
@@ -39,6 +39,7 @@ To get started with the system monitoring, follow the steps below:
 - Python 
 - Flask
 - psutil
+- Flask-Session
 <!-- Installation Section -->
 ### Installation
 
@@ -62,10 +63,27 @@ To get started with the system monitoring, follow the steps below:
    python3 app.py
     ```
 
-2. Open your web browser and navigate to http://localhost:5000/ to access the monitoring dashboard.
+2. Open your web browser and navigate to http://localhost:5000/ to access the monitoring dashboard. (username: admin ; password: admin)
 3. Monitor your system's CPU and memory usage in real-time and view historical data for analysis.
 
-### Output
+<!-- Docker Section -->
+### Docker image
+[![Docker][Docker]][Docker-url]
+1. Run this command to build a Docker image
+```bash
+sudo docker built -t <image-name> .
+```
+
+2. To start the Flask server run this command
+```bash
+docker run -p 5000:5000 <image-name>
+``` 
+
+This will start the Flask server in a docker conatiner on your localhost. \
+Navigate to [http://localhost:5000/](http://localhost:5000/) on your browser to access the application. \
+(username: admin ; password: admin)
+
+### Screenshots
 ![Screenshot](static/images/login-screenshot.png)
 ![Screenshot](static/images/dashboard-screenshot.png)
 ![Screenshot](static/images/darkmode-screenshot.png)
@@ -79,6 +97,8 @@ To get started with the system monitoring, follow the steps below:
 [Flask-url]: https://flask.palletsprojects.com/en/2.3.x/
 [JavaScript]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
 [JavaScript-url]: #
+[Docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&labelColor=black&logo=docker&logoColor=white
+[Docker-url]: https://www.docker.com
 
 
 
