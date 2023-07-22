@@ -1,3 +1,4 @@
 Flask
 psutil
 flask-session
+kubernetes
